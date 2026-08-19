@@ -1,0 +1,16 @@
+[Unit]
+Description=JEESAN Daemon
+After=network.target tor.service
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/jeesan-core.py
+Restart=always
+User=root
+PIDFile=/var/run/jeesan.pid
+NoNewPrivileges=yes
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/tmp /var/tmp /opt
+
+[Install]
+WantedBy=multi-user.target
