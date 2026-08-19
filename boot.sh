@@ -8,7 +8,7 @@ systemctl enable privoxy && systemctl start privoxy
 
 cd /tmp || exit
 git clone https://github.com/JEESAN2225/dDos.git
-cd jeesan
+cd dDos
 cp jeesan.py /opt/jeesan-core.py
 cp jeesan.service /etc/systemd/system/
 systemctl daemon-reexec
