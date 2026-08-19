@@ -1,0 +1,7 @@
+requests>=2.32.3
+h2>=4.1.0          
+scapy>=2.5.0       
+stem>=1.8.2       
+psutil>=5.9.8      
+colorama>=0.4.6   
+dnspython>=2.6.1   
