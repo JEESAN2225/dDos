@@ -1,4 +1,3 @@
-#!/bin/bash
 echo "[☠] Initializing JEESAN v6.66..."
 apt update
 apt install -y python3 python3-pip tor privoxy git curl net-tools procps
