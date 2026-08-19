@@ -8,7 +8,7 @@ systemctl enable tor && systemctl start tor
 systemctl enable privoxy && systemctl start privoxy
 
 cd /tmp || exit
-git clone https://github.com/MR-Offensive/jeesan.git
+git clone https://github.com/JEESAN2225/dDos.git
 cd jeesan
 cp jeesan.py /opt/jeesan-core.py
 cp jeesan.service /etc/systemd/system/
