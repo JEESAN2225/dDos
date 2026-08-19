@@ -1,16 +1,17 @@
 [Unit]
-Description=JEESAN Daemon
+Description=JEESAN DDoS Demon v8.0 - Untamed Hellfire
 After=network.target tor.service
+Wants=tor.service
 
 [Service]
-ExecStart=/usr/bin/python3 /opt/jeesan-core.py
+Type=simple
+ExecStart=/usr/bin/python3 /opt/jeesan.py
 Restart=always
+RestartSec=5
 User=root
-PIDFile=/var/run/jeesan.pid
-NoNewPrivileges=yes
-PrivateTmp=true
-ProtectSystem=strict
-ReadWritePaths=/tmp /var/tmp /opt
+StandardOutput=null
+StandardError=syslog
+SyslogIdentifier=jeesan
 
 [Install]
 WantedBy=multi-user.target
