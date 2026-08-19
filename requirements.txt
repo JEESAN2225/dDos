@@ -1,9 +1,7 @@
 scapy>=2.5.0
-colorama
 requests[socks]
-h2
-stem
-pycryptodome
-paramiko
-pysmb
-rich
+stem>=1.8.1
+colorama
+cryptography>=41.0.0
+h2>=4.1.0
+psutil
