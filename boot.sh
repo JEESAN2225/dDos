@@ -4,11 +4,9 @@ apt update
 apt install -y python3 python3-pip tor privoxy git curl net-tools procps
 pip3 install scapy requests h2 stem colorama dnspython psutil
 
-# Start services
 systemctl enable tor && systemctl start tor
 systemctl enable privoxy && systemctl start privoxy
 
-# Clone core
 cd /tmp || exit
 git clone https://github.com/MR-Offensive/jeesan.git
 cd jeesan
