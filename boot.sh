@@ -1,4 +1,3 @@
-#!/bin/bash
 OS=$(uname -s)
 if [[ "$OS" == "Linux" ]]; then
     sudo systemctl enable jeesan.service 2>/dev/null
